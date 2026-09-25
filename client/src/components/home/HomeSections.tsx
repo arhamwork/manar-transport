@@ -2,13 +2,27 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faCarSide, faCheck, faCirclePlay, faClock, faGem, faHeadset, faLandmark, faMosque, faPlaneDeparture, faRoad, faRoute, faShieldHalved, faStar, faSuitcaseRolling } from "@fortawesome/free-solid-svg-icons";
 import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { Link } from "wouter";
+import { useEffect, useState } from "react";
 import { media, reelGallery, reels, services, tickerItems, vehicles, type Service, type Vehicle } from "@/data/siteData";
 import { openBooking } from "@/components/booking/BookingModal";
 
 const iconMap: Record<string, IconDefinition> = { plane: faPlaneDeparture, mosque: faMosque, landmark: faLandmark, route: faRoute, road: faRoad, star: faStar };
+const heroSlides = [
+  { image: "/manus-storage/medina-banner-dawn_ffe7034f.jpg", eyebrow: "Madinah, in a softer light", title: <>A considered welcome<br /><em>to the holy city.</em></>, body: "Thoughtful transportation for arrivals, hotel connections, and the moments that matter in Madinah." },
+  { image: "/manus-storage/medina-banner-courtyard_ec88ecb3.jpg", eyebrow: "Madinah, made easy", title: <>Move with calm<br /><em>and intention.</em></>, body: "From airport pick-up to private city movement, let the road feel as composed as the destination." },
+  { image: "/manus-storage/medina-banner-night_ffbd338a.jpg", eyebrow: "Saudi journeys, considered", title: <>Arrive with ease<br /><em>after dark.</em></>, body: "Reliable, comfortable transportation planning for Madinah, Makkah, and the road between them." },
+];
 
 export function Hero() {
-  return <section className="hero-section"><div className="hero-backdrop" /><div className="hero-content container"><div className="hero-copy"><span className="eyebrow eyebrow--gold">Saudi journeys, considered</span><h1>Move with <em>intention.</em><br />Arrive with ease.</h1><p>Premium transportation for airport transfers, Makkah, Madinah, Ziyarat journeys, and the moments in between.</p><div className="hero-actions"><Link className="gold-button" href="/services">Explore services <FontAwesomeIcon icon={faArrowRight} /></Link><button className="text-link text-link--light" onClick={openBooking}>Book a ride <FontAwesomeIcon icon={faArrowRight} /></button></div><div className="hero-proof"><span><FontAwesomeIcon icon={faShieldHalved} /> Safety-led</span><span><FontAwesomeIcon icon={faClock} /> Clear coordination</span><span><FontAwesomeIcon icon={faGem} /> Premium comfort</span></div></div><div className="hero-side-card"><div className="hero-side-card__media" style={{ backgroundImage: `url(${media.makkah})` }}><div className="hero-video-placeholder"><FontAwesomeIcon icon={faCirclePlay} /><span>Licensed Makkah video<br /><small>Add your licensed content here</small></span></div></div><div className="hero-side-card__caption"><span>01 / 04</span><strong>A quieter way to travel</strong><span>Saudi Arabia</span></div></div></div><div className="hero-orbit hero-orbit--one" /><div className="hero-orbit hero-orbit--two" /></section>;
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const slide = heroSlides[activeSlide];
+  useEffect(() => {
+    if (isPaused) return;
+    const timer = window.setInterval(() => setActiveSlide((current) => (current + 1) % heroSlides.length), 6500);
+    return () => window.clearInterval(timer);
+  }, [isPaused]);
+  return <section className="hero-section" onMouseEnter={() => setIsPaused(true)} onMouseLeave={() => setIsPaused(false)} onFocusCapture={() => setIsPaused(true)} onBlurCapture={() => setIsPaused(false)}><div className="hero-backdrop" style={{ backgroundImage: `linear-gradient(92deg, rgba(6,7,9,.98) 0%, rgba(6,7,9,.78) 43%, rgba(6,7,9,.34) 72%, rgba(6,7,9,.66) 100%), url('${slide.image}')` }} /><div className="hero-content container"><div className="hero-copy" key={activeSlide}><span className="eyebrow eyebrow--gold">{slide.eyebrow}</span><h1>{slide.title}</h1><p>{slide.body}</p><div className="hero-actions"><Link className="gold-button" href="/services">Explore services <FontAwesomeIcon icon={faArrowRight} /></Link><button className="text-link text-link--light" onClick={openBooking}>Book a ride <FontAwesomeIcon icon={faArrowRight} /></button></div><div className="hero-proof"><span><FontAwesomeIcon icon={faShieldHalved} /> Safety-led</span><span><FontAwesomeIcon icon={faClock} /> Clear coordination</span><span><FontAwesomeIcon icon={faGem} /> Premium comfort</span></div></div><div className="hero-side-card"><div className="hero-side-card__media" style={{ backgroundImage: `url(${media.makkah})` }}><div className="hero-video-placeholder"><FontAwesomeIcon icon={faCirclePlay} /><span>Licensed Makkah video<br /><small>Add your licensed content here</small></span></div></div><div className="hero-side-card__caption"><span>0{activeSlide + 1} / 0{heroSlides.length}</span><strong>A quieter way to travel</strong><span>Saudi Arabia</span></div></div></div><div className="hero-slide-controls" aria-label="Hero banner controls">{heroSlides.map((item, index) => <button key={item.image} className={activeSlide === index ? "is-active" : ""} onClick={() => setActiveSlide(index)} aria-label={`Show banner ${index + 1}`} aria-pressed={activeSlide === index}><span /></button>)}</div><div className="hero-orbit hero-orbit--one" /><div className="hero-orbit hero-orbit--two" /></section>;
 }
 
 export function Ticker() { return <div className="ticker"><div className="ticker-track">{[...tickerItems, ...tickerItems].map((item, index) => <span key={`${item}-${index}`}><i />{item}</span>)}</div></div>; }
