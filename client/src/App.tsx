@@ -11,6 +11,8 @@ import ContactPage from "@/pages/ContactPage";
 import SearchPage from "@/pages/SearchPage";
 import { PoliciesPage, PolicyDetailPage } from "@/pages/policies/PolicyPages";
 import { TravelAgentPage, PartnerLoginPage, CommissionPage } from "@/pages/travel-agent/TravelAgentPages";
+import { ThemeProvider } from "@/contexts/ThemeContext";
+import ReelsPage from "@/pages/ReelsPage";
 
 function Router() {
   return <Switch>
@@ -29,6 +31,7 @@ function Router() {
     <Route path="/travel-agent" component={TravelAgentPage} />
     <Route path="/travel-agent/partner-login" component={PartnerLoginPage} />
     <Route path="/travel-agent/commission-program" component={CommissionPage} />
+    <Route path="/reels" component={ReelsPage} />
     <Route path="/contact" component={ContactPage} />
     <Route path="/search" component={SearchPage} />
     <Route path="/404" component={NotFound} />
@@ -37,5 +40,5 @@ function Router() {
 }
 
 export default function App() {
-  return <ErrorBoundary><SiteLayout><Router /></SiteLayout></ErrorBoundary>;
+  return <ErrorBoundary><ThemeProvider defaultTheme="dark" switchable><SiteLayout><Router /></SiteLayout></ThemeProvider></ErrorBoundary>;
 }
