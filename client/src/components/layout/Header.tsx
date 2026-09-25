@@ -81,7 +81,18 @@ export default function Header() {
             </div>
           ))}
         </div>
-        <div className="mobile-drawer__footer"><Link className="gold-button gold-button--full" href="/contact" onClick={() => setMobileOpen(false)}>Start a booking <FontAwesomeIcon icon={faArrowRight} /></Link><span>031582422773</span></div>
+        <div className="mobile-drawer__footer">
+          <div className="mobile-drawer__actions">
+            <button className="mobile-drawer__action" onClick={() => { setSearchOpen(true); setMobileOpen(false); }}>
+              <FontAwesomeIcon icon={faMagnifyingGlass} /> Search the site
+            </button>
+            <Link className="mobile-drawer__action" href="/contact" onClick={() => setMobileOpen(false)}>
+              <FontAwesomeIcon icon={faPhone} /> Call the team
+            </Link>
+          </div>
+          <Link className="gold-button gold-button--full" href="/contact" onClick={() => setMobileOpen(false)}>Start a booking <FontAwesomeIcon icon={faArrowRight} /></Link>
+          <a className="mobile-drawer__phone" href="tel:031582422773">031582422773</a>
+        </div>
       </div>
       {mobileOpen && <button className="mobile-scrim" aria-label="Close navigation" onClick={() => setMobileOpen(false)} />}
     </>
