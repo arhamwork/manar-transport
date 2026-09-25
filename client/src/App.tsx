@@ -4,9 +4,9 @@ import SiteLayout from "@/components/layout/SiteLayout";
 import Home from "@/pages/Home";
 import NotFound from "@/pages/NotFound";
 import { ServicesPage, ServiceDetailPage } from "@/pages/services/ServicesPage";
-import { FleetPage, VehicleDetailPage } from "@/pages/fleet/FleetPage";
+import { FleetPage, FleetSlugPage } from "@/pages/fleet/FleetPage";
 import { AboutPage, OurStoryPage, CeoPage } from "@/pages/about/AboutPages";
-import InfoPage from "@/pages/info/InfoPage";
+import InfoPage, { InfoDetailPage } from "@/pages/info/InfoPage";
 import ContactPage from "@/pages/ContactPage";
 import SearchPage from "@/pages/SearchPage";
 import { PoliciesPage, PolicyDetailPage } from "@/pages/policies/PolicyPages";
@@ -18,11 +18,12 @@ function Router() {
     <Route path="/services" component={ServicesPage} />
     <Route path="/services/:slug">{(params) => <ServiceDetailPage slug={params.slug} />}</Route>
     <Route path="/fleet" component={FleetPage} />
-    <Route path="/fleet/:slug">{(params) => <VehicleDetailPage slug={params.slug} />}</Route>
+    <Route path="/fleet/:slug">{(params) => <FleetSlugPage slug={params.slug} />}</Route>
     <Route path="/about" component={AboutPage} />
     <Route path="/about/our-story" component={OurStoryPage} />
     <Route path="/about/ceo-message" component={CeoPage} />
     <Route path="/info" component={InfoPage} />
+    <Route path="/info/:slug">{(params) => <InfoDetailPage slug={params.slug} />}</Route>
     <Route path="/policies" component={PoliciesPage} />
     <Route path="/policies/:slug">{(params) => <PolicyDetailPage slug={params.slug} />}</Route>
     <Route path="/travel-agent" component={TravelAgentPage} />

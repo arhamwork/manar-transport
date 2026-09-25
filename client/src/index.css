@@ -265,6 +265,7 @@ p { color: var(--muted); line-height: 1.75; }
 .gallery-controls button { display: inline-flex; align-items: center; gap: 8px; padding: 0; background: transparent; color: var(--gold-bright); font-size: 11px; cursor: pointer; }
 .vehicle-detail__copy h2 { margin: 18px 0 14px; font-size: clamp(2.5rem, 5vw, 4.3rem); }
 .vehicle-detail__copy > p { font-size: 14px; }
+.vehicle-detail__actions { display: flex; align-items: center; gap: 25px; flex-wrap: wrap; margin-top: 30px; }
 .vehicle-specs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 30px 0; padding: 18px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .vehicle-specs div { display: grid; gap: 7px; }
 .vehicle-specs span { color: var(--gold); font-size: 9px; letter-spacing: .12em; text-transform: uppercase; }

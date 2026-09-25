@@ -137,11 +137,24 @@ export const vehicles: Vehicle[] = [
   },
 ];
 
+export const fleetCategories = [
+  { slug: "sedans", label: "Sedans", title: "Sedans for composed city movement.", body: "A refined choice for airport arrivals, hotel transfers, and private city journeys where comfort and presentation matter.", image: media.chauffeur, match: "Sedan" },
+  { slug: "luxury", label: "Luxury", title: "Luxury travel, quietly considered.", body: "A premium vehicle category for guests who want a more elevated cabin, a polished welcome, and a calmer road experience.", image: media.tower, match: "Luxury" },
+  { slug: "suvs", label: "SUVs", title: "SUVs for the longer road.", body: "Confident vehicles for intercity movement, Ziyarat plans, and routes where space and road-trip comfort make the difference.", image: media.desert, match: "SUV" },
+  { slug: "vans", label: "Vans", title: "Room for the people and the plan.", body: "Practical, comfortable group transportation for families, small groups, luggage, and pilgrimage travel planning.", image: media.van, match: "Van" },
+];
+
+export const infoPages = [
+  { slug: "useful-information", label: "Useful Information", title: "The practical things, in one place.", eyebrow: "Useful information", body: "A clear starting point for airport arrivals, booking preparation, and the small details that make a travel day easier.", image: media.makkah, details: ["Share your arrival or departure point", "Keep baggage and group size in the request", "Use WhatsApp for the fastest follow-up"] },
+  { slug: "hajj-umrah-information", label: "Hajj & Umrah Information", title: "Plan the movement around a meaningful journey.", eyebrow: "Hajj & Umrah information", body: "Transportation planning for Hajj and Umrah-related journeys, with current religious and regulatory guidance always confirmed through official authorities.", image: media.tower, details: ["Confirm current requirements with official Saudi sources", "Share hotel, city, group, and timing details", "Ask the Manar team about available transport options"] },
+  { slug: "travel-information", label: "Travel Information", title: "A little more clarity before you go.", eyebrow: "Travel information", body: "Helpful travel-planning notes for routes between airports, hotels, Makkah, Madinah, and the destinations in between.", image: media.desert, details: ["Allow time for airport formalities and baggage", "Plan intercity routes around your real schedule", "Keep a direct contact channel open for changes"] },
+];
+
 export const navGroups = [
   { label: "Services", href: "/services", items: services.map(({ title, slug }) => ({ label: title, href: `/services/${slug}` })) },
-  { label: "Fleet", href: "/fleet", items: ["Sedans", "Luxury", "SUVs", "Vans"].map((label) => ({ label, href: "/fleet" })) },
+  { label: "Fleet", href: "/fleet", items: fleetCategories.map(({ label, slug }) => ({ label, href: `/fleet/${slug}` })) },
   { label: "About", href: "/about", items: [{ label: "Our Story & Mission", href: "/about/our-story" }, { label: "CEO Message", href: "/about/ceo-message" }] },
-  { label: "Info", href: "/info", items: [{ label: "Useful Information", href: "/info" }, { label: "Hajj & Umrah Information", href: "/info" }, { label: "Travel Information", href: "/info" }] },
+  { label: "Info", href: "/info", items: infoPages.map(({ label, slug }) => ({ label, href: `/info/${slug}` })) },
   { label: "Policies", href: "/policies", items: [{ label: "Terms & Conditions", href: "/policies/terms" }, { label: "Privacy Policy", href: "/policies/privacy" }, { label: "Refund / Cancellation", href: "/policies/refund" }] },
   { label: "Travel Agent", href: "/travel-agent", items: [{ label: "Partner Login", href: "/travel-agent/partner-login" }, { label: "Commission Program", href: "/travel-agent/commission-program" }] },
 ];
