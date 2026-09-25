@@ -1,42 +1,40 @@
-import { Toaster } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
-import { ThemeProvider } from "./contexts/ThemeContext";
-import Home from "./pages/Home";
-
+import SiteLayout from "@/components/layout/SiteLayout";
+import Home from "@/pages/Home";
+import NotFound from "@/pages/NotFound";
+import { ServicesPage, ServiceDetailPage } from "@/pages/services/ServicesPage";
+import { FleetPage, VehicleDetailPage } from "@/pages/fleet/FleetPage";
+import { AboutPage, OurStoryPage, CeoPage } from "@/pages/about/AboutPages";
+import InfoPage from "@/pages/info/InfoPage";
+import ContactPage from "@/pages/ContactPage";
+import SearchPage from "@/pages/SearchPage";
+import { PoliciesPage, PolicyDetailPage } from "@/pages/policies/PolicyPages";
+import { TravelAgentPage, PartnerLoginPage, CommissionPage } from "@/pages/travel-agent/TravelAgentPages";
 
 function Router() {
-  return (
-    <Switch>
-      <Route path={"/"} component={Home} />
-      <Route path={"/404"} component={NotFound} />
-      {/* Final fallback route */}
-      <Route component={NotFound} />
-    </Switch>
-  );
+  return <Switch>
+    <Route path="/" component={Home} />
+    <Route path="/services" component={ServicesPage} />
+    <Route path="/services/:slug">{(params) => <ServiceDetailPage slug={params.slug} />}</Route>
+    <Route path="/fleet" component={FleetPage} />
+    <Route path="/fleet/:slug">{(params) => <VehicleDetailPage slug={params.slug} />}</Route>
+    <Route path="/about" component={AboutPage} />
+    <Route path="/about/our-story" component={OurStoryPage} />
+    <Route path="/about/ceo-message" component={CeoPage} />
+    <Route path="/info" component={InfoPage} />
+    <Route path="/policies" component={PoliciesPage} />
+    <Route path="/policies/:slug">{(params) => <PolicyDetailPage slug={params.slug} />}</Route>
+    <Route path="/travel-agent" component={TravelAgentPage} />
+    <Route path="/travel-agent/partner-login" component={PartnerLoginPage} />
+    <Route path="/travel-agent/commission-program" component={CommissionPage} />
+    <Route path="/contact" component={ContactPage} />
+    <Route path="/search" component={SearchPage} />
+    <Route path="/404" component={NotFound} />
+    <Route component={NotFound} />
+  </Switch>;
 }
 
-// NOTE: About Theme
-// - First choose a default theme according to your design style (dark or light bg), than change color palette in index.css
-//   to keep consistent foreground/background color across components
-// - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
-
-function App() {
-  return (
-    <ErrorBoundary>
-      <ThemeProvider
-        defaultTheme="light"
-        // switchable
-      >
-        <TooltipProvider>
-          <Toaster />
-          <Router />
-        </TooltipProvider>
-      </ThemeProvider>
-    </ErrorBoundary>
-  );
+export default function App() {
+  return <ErrorBoundary><SiteLayout><Router /></SiteLayout></ErrorBoundary>;
 }
-
-export default App;
