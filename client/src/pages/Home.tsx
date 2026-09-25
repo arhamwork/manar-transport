@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import { setPageMetadata } from "@/utils/metadata";
 
 export default function Home() {
-  useEffect(() => setPageMetadata("Premium Makkah, Madinah & Saudi Transportation", "Manar Transport provides premium airport transfers, Makkah, Madinah, Ziyarat, and intercity transportation planning."), []);
+  useEffect(() => { setPageMetadata("Premium Makkah, Madinah & Saudi Transportation", "Manar Transport provides premium airport transfers, Makkah, Madinah, Ziyarat, and intercity transportation planning."); }, []);
   return <div className="home-page">
     <Hero /><Ticker />
     <section className="section section--services container"><SectionHeading eyebrow="The Manar standard" title="Travel, with the noise taken out." body="A focused range of private transportation services for the journeys that deserve a little more care." action={{ label: "See all services", href: "/services" }} /><div className="services-grid">{services.slice(0, 4).map((service) => <ServiceCard service={service} key={service.slug} />)}</div></section>

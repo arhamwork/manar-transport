@@ -7,6 +7,6 @@ import FloatingActions from "@/components/chatbot/FloatingActions";
 
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
-  useEffect(() => window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior }), [location]);
+  useEffect(() => { window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior }); }, [location]);
   return <div className="site-frame"><Header /><main>{children}</main><Footer /><BookingModal /><FloatingActions /></div>;
 }
